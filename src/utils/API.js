@@ -1,15 +1,16 @@
 import axios from "axios"
 import React from 'react';
 import ReactDOM from 'react-dom';
-
+import Search from '../pages/Search'
+import SearchBox from '../components/SearchBox'
 
 
 
 
 export default {
-    
-    getBooks: function() { 
-        return axios.get("https://www.googleapis.com/books/v1/volumes?q=Dune"
+     
+    getBooks(searchValue)  { 
+        return axios.get("https://www.googleapis.com/books/v1/volumes?q=${searchValue}"
             ).then(response => {
                 return response.data;
                 // console.log(response.items)

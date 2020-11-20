@@ -1,20 +1,40 @@
 import React from "react";
-function SearchBox() {
-  return (
-    <div
-      style={{ height: 460, clear: "both", paddingTop: 120, textAlign: "center", marginTop: 98 }}
-      className="jumbotron"
-    >
-     <h1>Search at the Book Nook!</h1>
-     <h3>Begin your search!</h3>
-     <div className="form-center" style={{ clear: "both", marginRight: 700, marginLeft: 700, marginTop: 100, textAlign: "center" }} >
-             <div className="card" >
-              <input className="form-control" type="search" placeholder="search"onChange={event => this.handleSearch(event)}/>
-              <button>Search</button>
-                 {/* <button onClick ={event => this.handleSearch(event)}>Search</button> */}
-                 </div>
-          </div>
+import "../App.css"
+
+
+class SearchBox extends React.Component {
+    constructor(props) {
+       super(props)
+       this.state = {
+        
+        searchValue:""
+       };
+    }
+handleSearch = event => {
+    event.preventDefault();
+    console.log("clicked");
+  
+    
+}
+
+render() {
+    return (
+        <div
+            style={{ height: 460, clear: "both", paddingTop: 120, textAlign: "center", marginTop: 98 }}
+            className="jumbotron"
+        >
+            <h1>Search at the Book Nook!</h1>
+            <div className="card-center">
+            <h3>Begin your search!</h3>
+            <div>
+                <form className="form-inline my-2 my-lg-0" >
+                    <input className="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"/>
+                        <button className="btn btn-outline-dark my-2 my-sm-0" type="submit" onClick={event =>  console.log("clicked")}  value={this.state.searchValue}>Search</button>
+                        </form >
+                        </div>
+    </div>
     </div>
   );
+}
 }
 export default SearchBox;

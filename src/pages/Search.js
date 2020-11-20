@@ -1,4 +1,4 @@
-import React from "react";
+import React, {Component} from "react";
 import SearchBox from "../components/SearchBox";
 import API from "../utils/API";
 console.log(API.getBooks());
