@@ -23,7 +23,7 @@ class Search extends React.Component {
               let erecord = {
                  id: i + 1,
                  title: bookData[i].volumeInfo.title,
-                 author: bookData[i].volumeInfo.author,
+                 author: bookData[i].volumeInfo.authors,
                  description: bookData[i].description,
                 //  imageLinks: bookData[i].imageLinks.smallThumbnail,
                  infoLink: bookData[i].infoLink,
@@ -59,25 +59,14 @@ class Search extends React.Component {
   return(
        <div>
           <form className="form-inline">
-             <div className="card">
+             <div className="card" >
               <input className="form-control" type="search" placeholder="search"onChange={event => this.handleSearch(event)}/>
+              <button>Search</button>
                  {/* <button onClick ={event => this.handleSearch(event)}>Search</button> */}
                  </div>
           </form>
-          {/* <h1 id='title'>React Dynamic Table</h1> */}
-          {/* < Data /> */}
-          <table id='books' className="table">
-{/*             
-                <thead>
-                   <tr>
-                <th scope="col">image</th>
-                      <th scope="col">firstname</th>
-                      <th scope="col">lastname</th>
-                      <th scope="col">age</th>
-                      <th scope="col">email</th>
-                   </tr>
-                </thead> */}
 
+          <table id='books' className="table">
                 <tbody>
               
                    {/* <tr>{this.renderTableHeader()}</tr> */}
