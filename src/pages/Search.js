@@ -1,4 +1,5 @@
 import React from "react";
+import SearchBox from "../components/SearchBox";
 import API from "../utils/API";
 console.log(API.getBooks());
 
@@ -55,36 +56,47 @@ class Search extends React.Component {
     })
  }
 
+
+ handleSearch = event => {
+      
+  //gets the actual value out of the search box
+  const searchValue = event.target.value
+  const filteredEmp = this.state.employees.filter(folks => {
+      //need to merge the data together to see if user input is anywhere inside
+      let values = Object.values(folks).join("").toLowerCase()
+      console.log(values);
+      return values.indexOf(searchValue.toLowerCase())!== -1
+  } )
+  this.setState({
+      filteredEmployees: filteredEmp
+  })
+
+}
  render() {
   return(
        <div>
-          <form className="form-inline">
-             <div className="card" >
-              <input className="form-control" type="search" placeholder="search"onChange={event => this.handleSearch(event)}/>
-              <button>Search</button>
-                 {/* <button onClick ={event => this.handleSearch(event)}>Search</button> */}
-                 </div>
-          </form>
-
+      < SearchBox />
+          <div className="card" >
           <table id='books' className="table">
+          <thead>
+                     <tr>
+                  <th scope="col">image</th>
+                        <th scope="col">Title</th>
+                        <th scope="col">Author(s)</th>
+                        <th scope="col">Description</th>
+                        <th scope="col">Link</th>
+                     </tr>
+                  </thead>
                 <tbody>
               
                    {/* <tr>{this.renderTableHeader()}</tr> */}
                    {this.renderTableData()}
                 </tbody>
              </table>
+             </div>
        </div>
   )
  }
-// function Search() {
-//   return (
-//     <div
-//       style={{ height: 200, clear: "both", paddingTop: 120, textAlign: "center" }}
-      
-//     >
-//         <input className="searching"></input>
-//         <button>Search</button>
-//     </div>
-//   );
+
  }
 export default Search;
