@@ -16,7 +16,7 @@ class Search extends React.Component {
      console.log(API.getBooks())
      API.getBooks()
         .then((response) => {
-           const bookData = response.items[0].volumeInfo.title;
+           const bookData = response.items;
            const bookTemp = [];
            console.log(bookData)
            for (let i = 0; i < 5; i++) {
@@ -24,10 +24,10 @@ class Search extends React.Component {
                  id: i + 1,
                  title: bookData[i].volumeInfo.title,
                  author: bookData[i].volumeInfo.author,
-                 email: bookData[i].email,
-                 image: bookData[i].picture.medium,
-                 phone: bookData[i].cell,
-                 age: bookData[i].dob.age,
+                 description: bookData[i].description,
+                //  imageLinks: bookData[i].imageLinks.smallThumbnail,
+                 infoLink: bookData[i].infoLink,
+                
               };
               bookTemp.push(erecord);
            }
@@ -38,16 +38,16 @@ class Search extends React.Component {
 
   renderTableData() {
     return this.state.books.map((books, index) => {
-       const { image, id, firstname, lastname, age, email } = books //destructuring
+       const { id, title, author, description, infoLink } = books //destructuring
        return (
 
 
           <tr key={id}>
-             <td><img className="img-responsive" src={image} alt="folks"/></td>
-             <td>{firstname}</td>
-             <td>{lastname}</td>
-             <td>{age}</td>
-             <td>{email}</td>
+             {/* <td><img className="img-responsive" src={imageLinks} alt="folks"/></td> */}
+             <td>{title}</td>
+             <td>{author}</td>
+             <td>{description}</td>
+             <td>{infoLink}</td>
           </tr>
 
 
@@ -66,8 +66,8 @@ class Search extends React.Component {
           </form>
           {/* <h1 id='title'>React Dynamic Table</h1> */}
           {/* < Data /> */}
-          <table id='employees' className="table">
-            
+          <table id='books' className="table">
+{/*             
                 <thead>
                    <tr>
                 <th scope="col">image</th>
@@ -76,7 +76,7 @@ class Search extends React.Component {
                       <th scope="col">age</th>
                       <th scope="col">email</th>
                    </tr>
-                </thead>
+                </thead> */}
 
                 <tbody>
               
