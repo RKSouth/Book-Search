@@ -24,9 +24,9 @@ class Search extends React.Component {
                  id: i + 1,
                  title: bookData[i].volumeInfo.title,
                  author: bookData[i].volumeInfo.authors,
-                 description: bookData[i].description,
-                //  imageLinks: bookData[i].imageLinks.smallThumbnail,
-                 infoLink: bookData[i].infoLink,
+                 description: bookData[i].volumeInfo.description,
+                 imageLinks: bookData[i].volumeInfo.imageLinks.smallThumbnail,
+                 infoLink: bookData[i].volumeInfo.infoLink,
                 
               };
               bookTemp.push(erecord);
@@ -38,12 +38,12 @@ class Search extends React.Component {
 
   renderTableData() {
     return this.state.books.map((books, index) => {
-       const { id, title, author, description, infoLink } = books //destructuring
+       const { id, title, author, imageLinks, description, infoLink } = books //destructuring
        return (
 
 
           <tr key={id}>
-             {/* <td><img className="img-responsive" src={imageLinks} alt="folks"/></td> */}
+             <td><img className="img-responsive" src={imageLinks} alt="folks"/></td>
              <td>{title}</td>
              <td>{author}</td>
              <td>{description}</td>
