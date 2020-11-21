@@ -20,7 +20,7 @@ class Search extends React.Component {
            const bookData = response.items;
            const bookTemp = [];
            console.log(bookData)
-           for (let i = 0; i < 5; i++) {
+           for (let i = 0; i < 10; i++) {
               let erecord = {
                  id: i + 1,
                  title: bookData[i].volumeInfo.title,
@@ -48,7 +48,8 @@ class Search extends React.Component {
              <td>{title}</td>
              <td>{author}</td>
              <td>{description}</td>
-             <td>{infoLink}</td>
+             <td><a className="Link" href={infoLink}>View</a>
+             <button>Save</button></td>
           </tr>
 
 
@@ -67,7 +68,7 @@ handleSearch = event => {
        const bookData = response.items;
        const bookTemp = [];
        console.log(bookData)
-       for (let i = 0; i < 5; i++) {
+       for (let i = 0; i < 10; i++) {
           let erecord = {
              id: i + 1,
              title: bookData[i].volumeInfo.title,
