@@ -89,6 +89,11 @@ handleSearch = event => {
 
  render() {
   return(
+   <div>
+   <div
+   style={{ height: 860, clear: "both", paddingTop: 120, textAlign: "center", marginTop: 98 }}
+   className="jumbotron" id ="Search"
+>
        <div>
              <h1>Search at the Book Nook!</h1>
             <div className="card-center">
@@ -98,9 +103,14 @@ handleSearch = event => {
                     <input className="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" onChange={event => this.searchValue=event.target.value}/>
                         <button className="btn btn-outline-dark my-2 my-sm-0" type="submit"    onClick={event => this.handleSearch(event)}>Search</button>
                         </form >
+                        <a className="nav-link" href="#Results">Results</a>
                         </div>
     </div>
-          <div className="card" >
+    <div id="Results"></div>
+    </div>
+    </div >
+          <div className="card"  >
+             <h3>Your Search Results</h3>
           <table id='books' className="table">
           <thead>
                      <tr>
