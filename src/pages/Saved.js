@@ -1,28 +1,33 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import Navbar from "../components/Navbar";
+import Jumbotron from "../components/Jumbotron";
+import API from "../utils/API";
+
+
 function Saved() {
-  return (
-    <div className= "Card">
-
-    </div>
-  );
-}
-// renderTableData() {
-//     return this.state.filteredEmployees.map((filteredEmployees, index) => {
-//        const { image, id, firstname, lastname, age, email } = filteredEmployees //destructuring
-//        return (
+    const [books, setBooks] = useState([]);
 
 
-//           <tr key={id}>
-//              <td><img className="img-responsive" src={image} alt="folks"/></td>
-//              <td>{firstname}</td>
-//              <td>{lastname}</td>
-//              <td>{age}</td>
-//              <td>{email}</td>
-//           </tr>
+    const deleteBooks = (id) => {
+       
+    };
 
+    // grabbing the books from the database on initial render
+    useEffect(() => {
+        API.getBooks()
+            .then(res => setBooks(res.data))
+        // console.log(books)
+    }, []);
 
-//        )
-//     })
-//  }
+    // re-render page when books is updated
+    useEffect(() => {
+    }, [books]);
+
+    return (
+        <div >
+           Saved Books
+        </div>
+    );
+};
 
 export default Saved;

@@ -8,16 +8,27 @@ import SearchBox from '../components/SearchBox'
 
 
 export default {
-     
-    getBooks(searchValue)  { 
-        return axios.get("https://www.googleapis.com/books/v1/volumes?q=${searchValue}"
-            ).then(response => {
-                return response.data;
-                // console.log(response.items)
-            }
-                
-                    )
-            }
+    getBooks: function(searchValue) {
+        return axios.get('https://www.googleapis.com/books/v1/volumes?q=' + searchValue)
+        .then(response => {
+                        return response.data;
+            //             // console.log(response.items)
+                    }
+                        
+                            )
+
+    }
+    
+
+            // saveBooks(hola)  { 
+            //     return axios.get("https://www.googleapis.com/books/v1/volumes?q=hola"
+            //         ).then(response => {
+            //             return response.data;
+            //             // console.log(response.items)
+            //         }
+                        
+            //                 )
+            //         }
 
 
     }

@@ -1,5 +1,8 @@
 import React from "react";
+import API from "../utils/API"
 import "../App.css"
+import Search from "../pages/Search"
+
 
 
 class SearchBox extends React.Component {
@@ -29,7 +32,7 @@ render() {
             <div>
                 <form className="form-inline my-2 my-lg-0" >
                     <input className="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"/>
-                        <button className="btn btn-outline-dark my-2 my-sm-0" type="submit" onClick={event =>  console.log("clicked")}  value={this.state.searchValue}>Search</button>
+                        <button className="btn btn-outline-dark my-2 my-sm-0" type="submit"    onClick={this.state.searchValue.onClick} value={this.state.searchValue}>Search</button>
                         </form >
                         </div>
     </div>

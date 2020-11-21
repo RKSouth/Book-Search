@@ -57,21 +57,23 @@ class Search extends React.Component {
  }
 
 
- handleSearch = event => {
-      
-  //gets the actual value out of the search box
-  const searchValue = event.target.value
-  const filteredEmp = this.state.employees.filter(folks => {
-      //need to merge the data together to see if user input is anywhere inside
-      let values = Object.values(folks).join("").toLowerCase()
-      console.log(values);
-      return values.indexOf(searchValue.toLowerCase())!== -1
-  } )
-  this.setState({
-      filteredEmployees: filteredEmp
-  })
-
+handleSearch(event) {
+   console.log(event)  
 }
+  
+//   //gets the actual value out of the search box
+//   const searchValue = event.target.value
+//   const filteredEmp = this.state.employees.filter(folks => {
+//       //need to merge the data together to see if user input is anywhere inside
+//       let values = Object.values(folks).join("").toLowerCase()
+//       console.log(values);
+//       return values.indexOf(searchValue.toLowerCase())!== -1
+//   } )
+//   this.setState({
+//       filteredEmployees: filteredEmp
+//   })
+
+
  render() {
   return(
        <div>
