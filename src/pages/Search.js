@@ -57,27 +57,49 @@ class Search extends React.Component {
  }
 
 
-handleSearch(event) {
-   console.log(event)  
-}
+handleSearch = event => {
+    event.preventDefault();
+    console.log("clicked");
+    // const searchValue = event.target.value
+    console.log(this.searchValue)
+    API.getBooks(this.searchValue)
+    .then((response) => {
+       const bookData = response.items;
+       const bookTemp = [];
+       console.log(bookData)
+       for (let i = 0; i < 5; i++) {
+          let erecord = {
+             id: i + 1,
+             title: bookData[i].volumeInfo.title,
+             author: bookData[i].volumeInfo.authors,
+             description: bookData[i].volumeInfo.description,
+             imageLinks: bookData[i].volumeInfo.imageLinks.smallThumbnail,
+             infoLink: bookData[i].volumeInfo.infoLink,
+            
+          };
+          bookTemp.push(erecord);
+       }
+       this.setState({ books: bookTemp });
+       console.log(bookTemp);
+    });
   
-//   //gets the actual value out of the search box
-//   const searchValue = event.target.value
-//   const filteredEmp = this.state.employees.filter(folks => {
-//       //need to merge the data together to see if user input is anywhere inside
-//       let values = Object.values(folks).join("").toLowerCase()
-//       console.log(values);
-//       return values.indexOf(searchValue.toLowerCase())!== -1
-//   } )
-//   this.setState({
-//       filteredEmployees: filteredEmp
-//   })
+    
+}
 
 
  render() {
   return(
        <div>
-      < SearchBox />
+             <h1>Search at the Book Nook!</h1>
+            <div className="card-center">
+            <h3>Begin your search!</h3>
+            <div>
+                <form className="form-inline my-2 my-lg-0" >
+                    <input className="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" onChange={event => this.searchValue=event.target.value}/>
+                        <button className="btn btn-outline-dark my-2 my-sm-0" type="submit"    onClick={event => this.handleSearch(event)}>Search</button>
+                        </form >
+                        </div>
+    </div>
           <div className="card" >
           <table id='books' className="table">
           <thead>

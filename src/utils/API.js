@@ -8,8 +8,9 @@ import SearchBox from '../components/SearchBox'
 
 
 export default {
-    getBooks: function(searchValue) {
-        return axios.get('https://www.googleapis.com/books/v1/volumes?q=' + searchValue)
+    getBooks: function(searching) {
+        // console.log(SearchBox.this.searchValue);
+        return axios.get('https://www.googleapis.com/books/v1/volumes?q=' + searching)
         .then(response => {
                         return response.data;
             //             // console.log(response.items)
