@@ -2,6 +2,7 @@
   text-align: center;
 }
 
+
 .App-logo {
   height: 40vmin;
   pointer-events: none;
@@ -14,6 +15,22 @@
 }
 .jumbotron {
   opacity: 0.8;
+}
+
+h1 {
+  color: rgb(66,54,45);
+}
+
+.card {
+  background-color: rgb(66, 54, 45);
+  opacity: 0.89;
+  color: whitesmoke;
+}
+thead{
+  color: whitesmoke;
+}
+tbody {
+  color: whitesmoke;
 }
 .App-header {
   background-color: #282c34;
