@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import SearchBox from "../components/SearchBox";
+
 import API from "../utils/API";
 console.log(API.getBooks());
 
@@ -20,7 +20,7 @@ class Search extends React.Component {
            const bookData = response.items;
            const bookTemp = [];
            console.log(bookData)
-           for (let i = 0; i < 10; i++) {
+           for (let i = 0; i < 5; i++) {
               let erecord = {
                  id: i + 1,
                  title: bookData[i].volumeInfo.title,
@@ -49,7 +49,7 @@ class Search extends React.Component {
              <td>{author}</td>
              <td>{description}</td>
              <td><a className="Link" href={infoLink}>View</a>
-             <button>Save</button></td>
+             <button onClick={event => this.savehandler(event,id)}>Save</button></td>
           </tr>
 
 
@@ -57,6 +57,12 @@ class Search extends React.Component {
     })
  }
 
+savehandler(event, id) {
+   event.preventDefault();
+   console.log("saveclick");
+   console.log(this.state.books[id-1]);
+   API.saveBooks(this.state.books[id-1])
+ }
 
 handleSearch = event => {
     event.preventDefault();
@@ -68,7 +74,7 @@ handleSearch = event => {
        const bookData = response.items;
        const bookTemp = [];
        console.log(bookData)
-       for (let i = 0; i < 10; i++) {
+       for (let i = 0; i < 5; i++) {
           let erecord = {
              id: i + 1,
              title: bookData[i].volumeInfo.title,
