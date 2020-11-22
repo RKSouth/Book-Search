@@ -1,5 +1,5 @@
 # Book Search
-![Book Search](Images/FrontPage.png)
+![Book Search](FrontPage.png)
 
 ### A simple app to help you search books
 
