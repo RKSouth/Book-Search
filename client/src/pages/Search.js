@@ -1,5 +1,4 @@
-import React, {Component} from "react";
-
+import React from "react";
 import API from "../utils/API";
 console.log(API.getBooks());
 
@@ -41,8 +40,6 @@ class Search extends React.Component {
     return this.state.books.map((books, index) => {
        const { id, title, author, imageLinks, description, infoLink } = books //destructuring
        return (
-
-
           <tr key={id}>
              <td><img className="img-responsive" src={imageLinks} alt="folks"/></td>
              <td>{title}</td>
@@ -61,12 +58,14 @@ savehandler(event, id) {
    event.preventDefault();
    console.log("saveclick");
    console.log(this.state.books[id-1]);
-   API.saveBooks(this.state.books[id-1])
+   API.saveBooks(this.state.books[id-1]);
+   console.log(API.eatBooks())
  }
 
 handleSearch = event => {
     event.preventDefault();
     console.log("clicked");
+    console.log(API.eatBooks(2))
     // const searchValue = event.target.value
     console.log(this.searchValue)
     API.getBooks(this.searchValue)
@@ -130,7 +129,7 @@ handleSearch = event => {
                   </thead>
                 <tbody>
               
-                   {/* <tr>{this.renderTableHeader()}</tr> */}
+   
                    {this.renderTableData()}
                 </tbody>
              </table>

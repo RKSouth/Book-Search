@@ -1,74 +1,65 @@
 import React, { useEffect, useState } from "react";
 import API from "../utils/API";
 
-// class Search extends React.Component {
-// constructor(props) {
-//     super(props)
-//     this.state = {
-//        books: [],
-
-//     };
-//  }
-//  componentDidMount = () => {
-//     console.log(API.getBooks())
-//     API.getBooks()
-//        .then((response) => {
-//           const bookData = response.items;
-//           const bookTemp = [];
-//           console.log(bookData)
-//           for (let i = 0; i < 5; i++) {
-//              let erecord = {
-//                 id: i + 1,
-//                 title: bookData[i].volumeInfo.title,
-//                 author: bookData[i].volumeInfo.authors,
-//                 description: bookData[i].volumeInfo.description,
-//                 imageLinks: bookData[i].volumeInfo.imageLinks.smallThumbnail,
-//                 infoLink: bookData[i].volumeInfo.infoLink,
-               
-//              };
-//              bookTemp.push(erecord);
-//           }
-//           this.setState({ books: bookTemp });
-//           console.log(this.state.books);
-//        });
-//  };
-
-function SavedBooks({ books, deleteBooks }) {
-    return( <div>
-        Saved Books Go Heeeeere
-    </div>) 
+class Saved extends React.Component {
+    constructor(props) {
+       super(props)
+       this.state = {
+        savedbooks: [],
    
-  };
-
-function Saved() {
-    const [books, setBooks] = useState([]);
-    const deleteBooks = (id) => {   API.deleteBook(id).then((res) => {
-        API.getApiBooks()
-            .then(response => {
-                setBooks(response.data)
-            })
-    })
-       
-    };
-
+       };
+    }
   
-    useEffect(() => {
-        API.getBooks()
-            .then(res => setBooks(res.data))
-    
-    }, []);
 
-    
-    useEffect(() => {
-    }, [books]);
+SavedBooks() {
+    API.eatBooks()
+    .then((response) => {
+        const savedbooks = response.data;
+        console.log(response.data)
+    return savedbooks.map((savedbooks, index) => {
+        const { id, title, author, imageLinks, description, infoLink } = savedbooks //destructuring
+        return (
+           <tr key={id}>
+              <td><img className="img-responsive" src={imageLinks} alt="folks"/></td>
+              <td>{title}</td>
+              <td>{author}</td>
+              <td>{description}</td>
+              <td><a className="Link" href={infoLink}>View</a>
+              <button onClick={event => this.deletehandler(event,id)}>Delete</button></td>
+           </tr>
+        )
+     })
 
-    return (
-        <div id="Saved">
-        <SavedBooks
-                    books={books}
-                    deleteBooks={deleteBooks} />
+    })
+}
+
+render() {
+    return(
+    
+
+<div>
+    <div id="Saved">
+        <div className="card">
+            <h3>Your Saved Results</h3>
+            <table id='books' className="table">
+            <thead>
+                <tr>
+                    <th scope="col">image</th>
+                    <th scope="col">Title</th>
+                    <th scope="col">Author(s)</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Link</th>
+                </tr>
+            </thead>
+            <tbody>
+                 {this.SavedBooks()}
+           </tbody>
+           </table>
         </div>
-    );
-};
-
+    </div>    
+</div>
+    
+ )}        
+}
+  
 export default Saved;

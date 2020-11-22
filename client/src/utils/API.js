@@ -21,8 +21,8 @@ export default {
     deleteBook: function(id) {
         return axios.delete("/api/books/" + id);
     },
-    eatBooks: function(Object){
-        return axios.get("/api/books/Object")
+    eatBooks: function(){
+        return axios.get("/api/books/" )
     }
 
 
