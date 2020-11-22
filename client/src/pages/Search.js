@@ -1,4 +1,5 @@
-import React from "react";
+import React, {Component} from "react";
+
 import API from "../utils/API";
 console.log(API.getBooks());
 
@@ -36,17 +37,39 @@ class Search extends React.Component {
         });
   };
 
+savehandler(event, id) {
+   event.preventDefault();
+   console.log("saveclick");
+   console.log(this.state.books[id-1]);
+   API.saveBooks(this.state.books[id-1]);
+ }
+//  savehandler = (event,id) => {
+  
+//    const book = this.state.books.find(books => books.id === id);
+//  console.log(book);
+//    console.log(this.state.books[id-1]);
+//    API.saveBooks({
+//       id: book.id,
+//       title: book.title,
+//       infoLink: book.infoLink,
+//       author: book.author,
+//       description: book.description,
+//       imageLinks: book.imageLinks.smallThumbnail
+//     });
+//  }
   renderTableData() {
     return this.state.books.map((books, index) => {
        const { id, title, author, imageLinks, description, infoLink } = books //destructuring
        return (
+
+
           <tr key={id}>
              <td><img className="img-responsive" src={imageLinks} alt="folks"/></td>
              <td>{title}</td>
              <td>{author}</td>
              <td>{description}</td>
              <td><a className="Link" href={infoLink}>View</a>
-             <button onClick={event => this.savehandler(event,id)}>Save</button></td>
+             <button onClick={(event) => this.savehandler(event,id)}>Save</button></td>
           </tr>
 
 
@@ -54,13 +77,7 @@ class Search extends React.Component {
     })
  }
 
-savehandler(event, id) {
-   event.preventDefault();
-   console.log("saveclick");
-   console.log(this.state.books[id-1]);
-   API.saveBooks(this.state.books[id-1]);
-   console.log(API.eatBooks())
- }
+
 
 handleSearch = event => {
     event.preventDefault();
@@ -129,7 +146,7 @@ handleSearch = event => {
                   </thead>
                 <tbody>
               
-   
+                   {/* <tr>{this.renderTableHeader()}</tr> */}
                    {this.renderTableData()}
                 </tbody>
              </table>

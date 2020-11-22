@@ -22,7 +22,7 @@ export default {
         return axios.delete("/api/books/" + id);
     },
     eatBooks: function(){
-        return axios.get("/api/books/" )
+        return axios.get("/api/books" )
     }
 
 
