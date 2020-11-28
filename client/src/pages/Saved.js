@@ -10,69 +10,68 @@ class Saved extends React.Component {
        };
     }
 
-    // componentDidMount = () => {
-    //     API.saveBooks().then(response => {
-    //         console.log("Your Component Did mount");
-    //         this.setState({ savedbooks: response.dat});
-    //        this.showBooks();
-    
-    //     })
-    // }
-
     componentDidMount = () => {
         API.eatBooks().then(response => {
             console.log("Your Component Did mount");
-            this.setState({ savedbooks: response});
-            this.showBooks();
+            console.log(response);
+            const saveTemp = [];
+            for (let i = 0; i <response.length ; i++){
+                console.log(response[i])
+                let saveRecord = {
+                    id:response[i].id,
+                    title:response[i].title,
+                    author:response[i].author,
+                    description:response[i].description,
+                    imageLinks:response[i].imageLinks,
+                    infoLink:response[i].infoLink
+                };
+                   saveTemp.push(saveRecord);
+            }
+            this.setState({ savedbooks: saveTemp});
+            console.log(this.state.savedbooks)
+         
     
         })
     }
+
+    deletehandler(event, id) {
+        
+        console.log("delete "  + id );
+        console.log(id);
+ const bookIndex = this.state.savedbooks.findIndex(savedbooks => savedbooks.id === id);
+ console.log(bookIndex)
   
-    showBooks() {
-        console.log(this.state.savedbooks)
+   console.log(this.state.savedbooks[bookIndex]);
+   API.deleteBook(this.state.savedbooks[bookIndex])
+//    .then(this.setState({savedbooks: this.state.savedbooks}))
+    }
+  
+    renderSavedTable() {
         return this.state.savedbooks.map((savedbooks, index) => {
-            const { id, title, author, imageLinks, description, infoLink } = savedbooks //destructuring
+            const { id, title, author, imageLinks, description, infoLink} = savedbooks
             return (
-               <tr key={id}>
-                  <td><img className="img-responsive" src={imageLinks} alt="folks"/></td>
-                  <td>{title}</td>
-                  <td>{author}</td>
-                  <td>{description}</td>
-                  <td><a className="Link" href={infoLink}>View</a>
-                  <button onClick={event => this.deletehandler(event,id)}>Delete</button></td>
-               </tr>
+                
+          <tr key={id} >
+          <td><img className="img-responsive" src={imageLinks} alt="folks"/></td>
+          <td>{title}</td>
+          <td>{author}</td>
+          <td>{description}</td>
+          <td><a className="Link" href={infoLink}>View</a>
+          <button onClick={ event => this.deletehandler( event, id)}>Delete</button></td>
+  
+       </tr>
             )
-         })
+        })
     }
 
-// SavedBooks() {
-//     API.eatBooks()
-//     .then((response) => {
-//         const savedbooks = response;
-//         console.log(response)
-//     return savedbooks.map((savedbooks, index) => {
-//         const { id, title, author, imageLinks, description, infoLink } = savedbooks //destructuring
-//         return (
-//            <tr key={id}>
-//               <td><img className="img-responsive" src={imageLinks} alt="folks"/></td>
-//               <td>{title}</td>
-//               <td>{author}</td>
-//               <td>{description}</td>
-//               <td><a className="Link" href={infoLink}>View</a>
-//               <button onClick={event => this.deletehandler(event,id)}>Delete</button></td>
-//            </tr>
-//         )
-//      })
 
-//     })
-// }
 
 render() {
     return(
     
 
 <div>
-    <div id="Saved">
+    <div id="Saved" style={{ height: 650, clear: "both", paddingTop: 120, textAlign: "center", marginTop: 108 }}>
         <div className="card">
             <h3>Your Saved Results</h3>
             <table id='books' className="table">
@@ -86,7 +85,7 @@ render() {
                 </tr>
             </thead>
             <tbody>
-                 {this.showBooks()}
+                 {this.renderSavedTable()}
            </tbody>
            </table>
         </div>

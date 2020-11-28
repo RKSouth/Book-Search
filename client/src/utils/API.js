@@ -13,8 +13,8 @@ export default {
         return axios
           .post('/api/books', savedBook)
           .then(function (response) {
-            console.log(response);
-            return response
+            console.log(response.data);
+            return response.data
           })
           .catch(function (error) {
             console.log(error);
@@ -43,8 +43,8 @@ export default {
     eatBooks: function(){
         return axios.get("/api/books/" )
         .then(response => {
-            return response;
-            console.log(response)
+            return response.data;
+            console.log(response.data)
         } )
     }
 

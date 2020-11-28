@@ -45,7 +45,9 @@ savehandler(event, id) {
  console.log(bookIndex)
    console.log("saveclick");
    console.log(this.state.books[bookIndex]);
-   API.saveBooks(this.state.books[bookIndex]);
+   API.saveBooks(this.state.books[bookIndex])
+   .then(this.setState({books: this.state.books}))
+   // this.setState({books: this.state.books})
  }
 
   renderTableData() {
@@ -105,7 +107,7 @@ handleSearch = event => {
   return(
    <div>
    <div
-   style={{ height: 850, clear: "both", paddingTop: 120, textAlign: "center", marginTop: 98 }}
+   style={{ height: 650, clear: "both", paddingTop: 120, textAlign: "center", marginTop: 138 }}
    className="jumbotron" id ="Search"
 >
        <div>
