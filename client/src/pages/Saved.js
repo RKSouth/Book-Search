@@ -9,29 +9,63 @@ class Saved extends React.Component {
    
        };
     }
+
+    // componentDidMount = () => {
+    //     API.saveBooks().then(response => {
+    //         console.log("Your Component Did mount");
+    //         this.setState({ savedbooks: response.dat});
+    //        this.showBooks();
+    
+    //     })
+    // }
+
+    componentDidMount = () => {
+        API.eatBooks().then(response => {
+            console.log("Your Component Did mount");
+            this.setState({ savedbooks: response});
+            this.showBooks();
+    
+        })
+    }
   
+    showBooks() {
+        console.log(this.state.savedbooks)
+        return this.state.savedbooks.map((savedbooks, index) => {
+            const { id, title, author, imageLinks, description, infoLink } = savedbooks //destructuring
+            return (
+               <tr key={id}>
+                  <td><img className="img-responsive" src={imageLinks} alt="folks"/></td>
+                  <td>{title}</td>
+                  <td>{author}</td>
+                  <td>{description}</td>
+                  <td><a className="Link" href={infoLink}>View</a>
+                  <button onClick={event => this.deletehandler(event,id)}>Delete</button></td>
+               </tr>
+            )
+         })
+    }
 
-SavedBooks() {
-    API.eatBooks()
-    .then((response) => {
-        const savedbooks = response.data;
-        console.log(response.data)
-    return savedbooks.map((savedbooks, index) => {
-        const { id, title, author, imageLinks, description, infoLink } = savedbooks //destructuring
-        return (
-           <tr key={id}>
-              <td><img className="img-responsive" src={imageLinks} alt="folks"/></td>
-              <td>{title}</td>
-              <td>{author}</td>
-              <td>{description}</td>
-              <td><a className="Link" href={infoLink}>View</a>
-              <button onClick={event => this.deletehandler(event,id)}>Delete</button></td>
-           </tr>
-        )
-     })
+// SavedBooks() {
+//     API.eatBooks()
+//     .then((response) => {
+//         const savedbooks = response;
+//         console.log(response)
+//     return savedbooks.map((savedbooks, index) => {
+//         const { id, title, author, imageLinks, description, infoLink } = savedbooks //destructuring
+//         return (
+//            <tr key={id}>
+//               <td><img className="img-responsive" src={imageLinks} alt="folks"/></td>
+//               <td>{title}</td>
+//               <td>{author}</td>
+//               <td>{description}</td>
+//               <td><a className="Link" href={infoLink}>View</a>
+//               <button onClick={event => this.deletehandler(event,id)}>Delete</button></td>
+//            </tr>
+//         )
+//      })
 
-    })
-}
+//     })
+// }
 
 render() {
     return(
@@ -52,7 +86,7 @@ render() {
                 </tr>
             </thead>
             <tbody>
-                 {this.SavedBooks()}
+                 {this.showBooks()}
            </tbody>
            </table>
         </div>

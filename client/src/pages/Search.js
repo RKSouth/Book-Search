@@ -13,6 +13,7 @@ class Search extends React.Component {
  
      };
   }
+  
   componentDidMount = () => {
      console.log(API.getBooks())
      API.getBooks()
@@ -22,7 +23,7 @@ class Search extends React.Component {
            console.log(bookData)
            for (let i = 0; i < 5; i++) {
               let erecord = {
-                 id: i + 1,
+                 id: parseInt(bookData[i].volumeInfo.industryIdentifiers[0].identifier),
                  title: bookData[i].volumeInfo.title,
                  author: bookData[i].volumeInfo.authors,
                  description: bookData[i].volumeInfo.description,
@@ -38,25 +39,15 @@ class Search extends React.Component {
   };
 
 savehandler(event, id) {
-   event.preventDefault();
+ event.preventDefault();
+ console.log(id);
+ const bookIndex = this.state.books.findIndex(books => books.id === id);
+ console.log(bookIndex)
    console.log("saveclick");
-   console.log(this.state.books[id-1]);
-   API.saveBooks(this.state.books[id-1]);
+   console.log(this.state.books[bookIndex]);
+   API.saveBooks(this.state.books[bookIndex]);
  }
-//  savehandler = (event,id) => {
-  
-//    const book = this.state.books.find(books => books.id === id);
-//  console.log(book);
-//    console.log(this.state.books[id-1]);
-//    API.saveBooks({
-//       id: book.id,
-//       title: book.title,
-//       infoLink: book.infoLink,
-//       author: book.author,
-//       description: book.description,
-//       imageLinks: book.imageLinks.smallThumbnail
-//     });
-//  }
+
   renderTableData() {
     return this.state.books.map((books, index) => {
        const { id, title, author, imageLinks, description, infoLink } = books //destructuring
@@ -69,7 +60,7 @@ savehandler(event, id) {
              <td>{author}</td>
              <td>{description}</td>
              <td><a className="Link" href={infoLink}>View</a>
-             <button onClick={(event) => this.savehandler(event,id)}>Save</button></td>
+             <button onClick={ event => this.savehandler( event, id)}>Save</button></td>
           </tr>
 
 
@@ -92,7 +83,7 @@ handleSearch = event => {
        console.log(bookData)
        for (let i = 0; i < 5; i++) {
           let erecord = {
-             id: i + 1,
+             id: parseInt(bookData[i].volumeInfo.industryIdentifiers[0].identifier),
              title: bookData[i].volumeInfo.title,
              author: bookData[i].volumeInfo.authors,
              description: bookData[i].volumeInfo.description,
@@ -114,7 +105,7 @@ handleSearch = event => {
   return(
    <div>
    <div
-   style={{ height: 860, clear: "both", paddingTop: 120, textAlign: "center", marginTop: 98 }}
+   style={{ height: 850, clear: "both", paddingTop: 120, textAlign: "center", marginTop: 98 }}
    className="jumbotron" id ="Search"
 >
        <div>

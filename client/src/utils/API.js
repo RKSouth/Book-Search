@@ -1,11 +1,4 @@
 import axios from "axios"
-import React from 'react';
-import ReactDOM from 'react-dom';
-import Search from '../pages/Search'
-import SearchBox from '../components/SearchBox'
-
-
-
 
 export default {
     getBooks: function(searching) {
@@ -14,15 +7,45 @@ export default {
         .then(response => {
                         return response.data;
                     } )
-    },
-    saveBooks: function(savedBook) {
-        return axios.post("/api/books", savedBook);
+    }, 
+     saveBooks: function (savedBook) {
+        console.log(savedBook);
+        return axios
+          .post('/api/books', savedBook)
+          .then(function (response) {
+            console.log(response);
+            return response
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
       },
+
+
+    // saveBooks: function(savedBook) {
+    //     console.log(savedBook);
+    //     return axios.post("/api/books", savedBook)    
+    //     .then(response => {
+    //         return response.data;
+    //     } ) .catch(function (error) {
+    //         console.log(error);
+    //       });
+    //   },
     deleteBook: function(id) {
-        return axios.delete("/api/books/" + id);
+        return axios.delete("/api/books/" + id)
+        .then(response => {
+            return response.data;
+        } )
     },
+
+
+
     eatBooks: function(){
-        return axios.get("/api/books" )
+        return axios.get("/api/books/" )
+        .then(response => {
+            return response;
+            console.log(response)
+        } )
     }
 
 
