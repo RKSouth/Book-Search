@@ -21,16 +21,6 @@ export default {
           });
       },
 
-
-    // saveBooks: function(savedBook) {
-    //     console.log(savedBook);
-    //     return axios.post("/api/books", savedBook)    
-    //     .then(response => {
-    //         return response.data;
-    //     } ) .catch(function (error) {
-    //         console.log(error);
-    //       });
-    //   },
     deleteBook: function(id) {
         return axios.delete("/api/books/" + id)
         .then(response => {
