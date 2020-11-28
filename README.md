@@ -24,7 +24,7 @@
 
 
 ## Deployed Site
-[ClickClick!](https://pure-dawn-66807.herokuapp.com/Search/)
+[ClickClick!](https://pure-dawn-66807.herokuapp.com/)
 
 ## Features 
 
