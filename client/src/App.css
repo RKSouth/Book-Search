@@ -21,17 +21,7 @@
 h1 {
   color: rgb(66,54,45);
 }
-form {
-  background-color: rgb(66, 54, 45);
-  opacity: 0.89;
-  color: whitesmoke;
-  height: 650;
-  padding-top: 120; 
-  text-align: "center";
-  margin-top: 108;
-  width: 5
-  0%;
-}
+
 .card {
   background-color: rgb(66, 54, 45);
   opacity: 0.89;

@@ -7,12 +7,13 @@ import Jumbotron from "../components/Jumbotron";
 
 
 
+
 // Search page that allows the user to search for books
 function Search() {
     // variables for the book the user is searching for
     const [searchState, setSearchState] = useState("");
     const [books, setBooks] = useState([]);
-    const [formObject, setFormObject] = useState({})
+ 
 
     // variables for the modal that will pop up when the user clicks on the save book button
     const [modalClass, setModalClass] = useState("modal hideModal");
@@ -100,10 +101,12 @@ function Search() {
 
 
     return (
-        <div className="mb-5">
-            <Navbar />
-            <Jumbotron />
-     
+      <div>
+      <div
+      style={{ height: 650, clear: "both", paddingTop: 120, textAlign: "center", marginTop: 138 }}
+      className="jumbotron" id ="Search"
+   >
+         
             <SearchBar
                 handleSearchChange={handleSearchChange}
                 searchBooks={searchBooks} />
@@ -115,6 +118,7 @@ function Search() {
                 text={text}
                 modalClass={modalClass}
             />
+        </div>
         </div>
     );
 };

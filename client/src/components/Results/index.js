@@ -14,7 +14,7 @@ function Results(props) {
           // console.log(book.volumeInfo.authors.length)
 
           return (
-            <div key={book.id + i} className="container">
+            <div key={book.id + i} className="container" id="Results">
               <div className="card result">
                 <div className="row mb-4 mt-3">
                   <div className="col-lg-4 bookImg">
@@ -73,7 +73,7 @@ function Results(props) {
           </div>
         </div>
       )}
-      {/* modal start */}
+
       <div className={props.modalClass}>
         <div>
           <div >

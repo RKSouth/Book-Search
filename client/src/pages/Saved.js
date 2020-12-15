@@ -3,10 +3,7 @@ import Navbar from "../components/Navbar";
 import Jumbotron from "../components/Jumbotron";
 import API from "../utils/booksAPI";
 import SavedBooks from "../components/SavedBooks";
-import { Link } from "react-router-dom";
-import { Col, Row, Container } from "../components/Grid";
-import { List, ListItem } from "../components/List";
-import { Input, TextArea, FormBtn } from "../components/Form";
+
 // Saved page displaying the books that are in the database
 function Saved() {
     const [books, setBooks] = useState([]);

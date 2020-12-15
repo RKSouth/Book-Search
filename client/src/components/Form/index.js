@@ -1,6 +1,35 @@
 import React from "react";
 
 // This file exports the Input, TextArea, and FormBtn components
+export function createForm(props) {
+  // const books = props.data
+   return( <form>
+                <Input
+                  onChange={props.handleInputChange}
+                  name="title"
+                  placeholder="Title (required)"
+                />
+                <Input
+                  onChange={props.handleInputChange}
+                  name="author"
+                  placeholder="Author (required)"
+                />
+                <TextArea
+                  onChange={props.handleInputChange}
+                  name="synopsis"
+                  placeholder="Synopsis (Optional)"
+                />
+                <FormBtn
+                  // disabled={!(formObject.author && formObject.title)}
+                  onClick={props.handleFormSubmit}
+                >
+                  Submit Book
+                </FormBtn>
+              </form>
+   )
+}
+
+
 
 export function Input(props) {
   return (
