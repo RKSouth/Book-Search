@@ -15,7 +15,7 @@ function Results(props) {
 
           return (
             <div key={book.id + i} className="container" id="Results">
-              <div className="card">
+              <div className="card-results">
               <h3>Your Search Results</h3>
                 
 
@@ -46,7 +46,7 @@ function Results(props) {
                     </p>
                     <p className="mr-4">{book.volumeInfo.description}</p>
                     <a
-                      className="btn btn-primary"
+                      className="btn btn-outline-light my-2 my-sm-0"
                       target="_blank"
                       rel="noreferrer"
                       href={book.volumeInfo.infoLink}
@@ -54,7 +54,7 @@ function Results(props) {
                       View
                     </a>
                     <button
-                      className="ml-3 btn btn-primary"
+                      className="btn btn-outline-light my-2 my-sm-0" 
                       onClick={() => {
                         props.saveBook(book);
                       }}
@@ -96,7 +96,7 @@ function Results(props) {
               <button
                 onClick={() => props.modalClose()}
                 type="button"
-                className="btn btn-secondary"
+                className="btn btn-outline-light my-2 my-sm-0" 
 
               >
                 Close
