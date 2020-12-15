@@ -27,12 +27,20 @@ h1 {
   opacity: 0.89;
   color: whitesmoke;
 }
-thead{
+
+.card-results {
+  background-color: rgb(66, 54, 45);
+  /* opacity: 0.89; */
   color: whitesmoke;
+  height: 360; 
+  clear: "both"; 
+  padding-top: 120; 
+  text-align: "center"; 
+  margin-top: 600;
+  margin: 3%;
 }
-tbody {
-  color: whitesmoke;
-}
+
+
 .App-header {
   background-color: #282c34;
   min-height: 100vh;

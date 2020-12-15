@@ -4,6 +4,7 @@ import Saved from "./pages/Saved";
 import './App.css';
 import Jumbotron from "./components/Jumbotron";
 import Navbar from "./components/Navbar"; 
+import Results from "./components/Results"
 // setting up the routes to the different pages in the application
 function App() {
   return (
@@ -13,8 +14,8 @@ function App() {
       <Switch>
         <Route path="/" exact component={Jumbotron} />
         <Route path="/Search" component={Search} />
-
       <Route path="/Saved" component={Saved} />
+      <Route path="/Results" component={Results} />
       </Switch>
     </div>
   </Router>
