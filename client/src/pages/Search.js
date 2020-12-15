@@ -1,152 +1,122 @@
-import React, {Component} from "react";
+import React, { useState, useEffect } from "react";
+import Navbar from "../components/Navbar"
+import SearchBar from "../components/SearchBar"
+import Results from "../components/Results"
+import API from '../utils/booksAPI'
+import Jumbotron from "../components/Jumbotron";
 
-import API from "../utils/API";
-console.log(API.getBooks());
 
 
+// Search page that allows the user to search for books
+function Search() {
+    // variables for the book the user is searching for
+    const [searchState, setSearchState] = useState("");
+    const [books, setBooks] = useState([]);
+    const [formObject, setFormObject] = useState({})
 
-class Search extends React.Component {
-  constructor(props) {
-     super(props)
-     this.state = {
-        books: [],
- 
-     };
-  }
-  
-  componentDidMount = () => {
-     console.log(API.getBooks())
-     API.getBooks()
-        .then((response) => {
-           const bookData = response.items;
-           const bookTemp = [];
-           console.log(bookData)
-           for (let i = 0; i < 5; i++) {
-              let erecord = {
-                 id: parseInt(bookData[i].volumeInfo.industryIdentifiers[0].identifier),
-                 title: bookData[i].volumeInfo.title,
-                 author: bookData[i].volumeInfo.authors,
-                 description: bookData[i].volumeInfo.description,
-                 imageLinks: bookData[i].volumeInfo.imageLinks.smallThumbnail,
-                 infoLink: bookData[i].volumeInfo.infoLink,
-                
-              };
-              bookTemp.push(erecord);
-           }
-           this.setState({ books: bookTemp });
-           console.log(this.state.books);
+    // variables for the modal that will pop up when the user clicks on the save book button
+    const [modalClass, setModalClass] = useState("modal hideModal");
+    const [text, setText] = useState("Saved!");
+    // saved book ids
+    const [ids, setIds] = useState([]);
+
+    // for the modal display to hide or show
+    useEffect(() => {
+    }, [modalClass]);
+
+    function modalClose() {
+        setModalClass("modal hideModal");
+    };
+
+    // function for the user's input that tracks every letter typed in by the user
+    const handleSearchChange = (e) => {
+        const { value } = e.target
+        setSearchState(value)
+        // console.log(searchState)
+    };
+
+    // function that is grabbing the information from the google books API
+    const searchBooks = async () => {
+        let temp = [];
+        temp.length = 0;
+        let newBooks = await API.getBooks(searchState)
+            .then((res) => {
+                return res.data.items;
+            });
+        setBooks(newBooks);
+        // grab saved books whenever a new search occurs
+        API.getApiBooks()
+            .then(res => {
+                for (let i = 0; i < res.data.length; i++) {
+                    temp.push(res.data[i].id);
+                }
+                console.log("savebook response: ", res)
+            })
+        console.log("temp: ", temp);
+        setIds(temp);
+    };
+
+    // function that allows books to be saved qne displaying the modal
+    const saveBook = (book) => {
+        // console.log("savebook: ", book);
+        var image;
+        if (book.volumeInfo.imageLinks === undefined) {
+            image = "./googlebookslogo.png"
+        } else {
+            image = book.volumeInfo.imageLinks.thumbnail
+        };
+
+        // console.log("book id: ", book.id);
+        if (!ids.includes(book.id)) {
+            setIds([...ids, book.id]);
+            setModalClass("modal showModal");
+            setText(book.volumeInfo.title + " was saved!");
+        } else {
+            setModalClass("modal showModal");
+            setText(book.volumeInfo.title + " is already saved!");
+        };
+
+        // setting an object with the data we grabbed from the axios call and passing in the data to be saved into the database
+        const data = {
+            title: book.volumeInfo.title,
+            author: book.volumeInfo.authors,
+            description: book.volumeInfo.description,
+            image: image,
+            link: book.volumeInfo.infoLink,
+            id: book.id
+        };
+
+        API.addBook(data).then(res => {
+            console.log("saved", res)
+
+
+        }).then(err => {
+            console.log("error", err);
+
         });
-  };
+    };
 
-savehandler(event, id) {
- event.preventDefault();
- console.log(id);
- const bookIndex = this.state.books.findIndex(books => books.id === id);
- console.log(bookIndex)
-   console.log("saveclick");
-   console.log(this.state.books[bookIndex]);
-   API.saveBooks(this.state.books[bookIndex])
-   .then(this.setState({books: this.state.books}))
-   // this.setState({books: this.state.books})
- }
-
-  renderTableData() {
-    return this.state.books.map((books, index) => {
-       const { id, title, author, imageLinks, description, infoLink } = books //destructuring
-       return (
+ 
 
 
-          <tr key={id}>
-             <td><img className="img-responsive" src={imageLinks} alt="folks"/></td>
-             <td>{title}</td>
-             <td>{author}</td>
-             <td>{description}</td>
-             <td><a className="Link" href={infoLink}>View</a>
-             <button onClick={ event => this.savehandler( event, id)}>Save</button></td>
-          </tr>
+    return (
+        <div className="mb-5">
+            <Navbar />
+            <Jumbotron />
+     
+            <SearchBar
+                handleSearchChange={handleSearchChange}
+                searchBooks={searchBooks} />
+               
+            <Results
+                data={books}
+                saveBook={saveBook}
+                modalClose={modalClose}
+                text={text}
+                modalClass={modalClass}
+            />
+        </div>
+    );
+};
 
-
-       )
-    })
- }
-
-
-
-handleSearch = event => {
-    event.preventDefault();
-    console.log("clicked");
-    console.log(API.eatBooks(2))
-    // const searchValue = event.target.value
-    console.log(this.searchValue)
-    API.getBooks(this.searchValue)
-    .then((response) => {
-       const bookData = response.items;
-       const bookTemp = [];
-       console.log(bookData)
-       for (let i = 0; i < 5; i++) {
-          let erecord = {
-             id: parseInt(bookData[i].volumeInfo.industryIdentifiers[0].identifier),
-             title: bookData[i].volumeInfo.title,
-             author: bookData[i].volumeInfo.authors,
-             description: bookData[i].volumeInfo.description,
-             imageLinks: bookData[i].volumeInfo.imageLinks.smallThumbnail,
-             infoLink: bookData[i].volumeInfo.infoLink,
-            
-          };
-          bookTemp.push(erecord);
-       }
-       this.setState({ books: bookTemp });
-       console.log(bookTemp);
-    });
-  
-    
-}
-
-
- render() {
-  return(
-   <div>
-   <div
-   style={{ height: 650, clear: "both", paddingTop: 120, textAlign: "center", marginTop: 138 }}
-   className="jumbotron" id ="Search"
->
-       <div>
-             <h1>Search at the Book Nook!</h1>
-            <div className="card-center">
-            <h3>Begin your search!</h3>
-            <div>
-                <form className="form-inline my-2 my-lg-0" >
-                    <input className="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" onChange={event => this.searchValue=event.target.value}/>
-                        <button className="btn btn-outline-dark my-2 my-sm-0" type="submit"    onClick={event => this.handleSearch(event)}>Search</button>
-                        </form >
-                        <a className="nav-link" href="#Results">Results</a>
-                        </div>
-    </div>
-    <div id="Results"></div>
-    </div>
-    </div >
-          <div className="card"  >
-             <h3>Your Search Results</h3>
-          <table id='books' className="table">
-          <thead>
-                     <tr>
-                  <th scope="col">image</th>
-                        <th scope="col">Title</th>
-                        <th scope="col">Author(s)</th>
-                        <th scope="col">Description</th>
-                        <th scope="col">Link</th>
-                     </tr>
-                  </thead>
-                <tbody>
-              
-                   {/* <tr>{this.renderTableHeader()}</tr> */}
-                   {this.renderTableData()}
-                </tbody>
-             </table>
-             </div>
-       </div>
-  )
- }
-
- }
 export default Search;

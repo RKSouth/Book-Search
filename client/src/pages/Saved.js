@@ -1,98 +1,61 @@
-import React from "react";
-import API from "../utils/API";
-
-class Saved extends React.Component {
-    constructor(props) {
-       super(props)
-       this.state = {
-        savedbooks: [],
-   
-       };
-    }
-
-    componentDidMount = () => {
-        API.eatBooks().then(response => {
-            console.log("Your Component Did mount");
-            console.log(response);
-            const saveTemp = [];
-            for (let i = 0; i <response.length ; i++){
-                console.log(response[i])
-                let saveRecord = {
-                    id:response[i].id,
-                    title:response[i].title,
-                    author:response[i].author,
-                    description:response[i].description,
-                    imageLinks:response[i].imageLinks,
-                    infoLink:response[i].infoLink
-                };
-                   saveTemp.push(saveRecord);
-            }
-            this.setState({ savedbooks: saveTemp});
-            console.log(this.state.savedbooks)
-         
-    
-        })
-    }
-
-    deletehandler(event, id) {
-        
-        console.log("delete "  + id );
-        console.log(id);
- const bookIndex = this.state.savedbooks.findIndex(savedbooks => savedbooks.id === id);
- console.log(bookIndex)
+import React, { useEffect, useState } from "react";
+import Navbar from "../components/Navbar";
+import Jumbotron from "../components/Jumbotron";
+import API from "../utils/booksAPI";
+import SavedBooks from "../components/SavedBooks";
+import { Link } from "react-router-dom";
+import { Col, Row, Container } from "../components/Grid";
+import { List, ListItem } from "../components/List";
+import { Input, TextArea, FormBtn } from "../components/Form";
+// Saved page displaying the books that are in the database
+function Saved() {
+    const [books, setBooks] = useState([]);
+ 
   
-   console.log(this.state.savedbooks[bookIndex]);
-   API.deleteBook(this.state.savedbooks[bookIndex])
-//    .then(this.setState({savedbooks: this.state.savedbooks}))
-    }
-  
-    renderSavedTable() {
-        return this.state.savedbooks.map((savedbooks, index) => {
-            const { id, title, author, imageLinks, description, infoLink} = savedbooks
-            return (
-                
-          <tr key={id} >
-          <td><img className="img-responsive" src={imageLinks} alt="folks"/></td>
-          <td>{title}</td>
-          <td>{author}</td>
-          <td>{description}</td>
-          <td><a className="Link" href={infoLink}>View</a>
-          <button onClick={ event => this.deletehandler( event, id)}>Delete</button></td>
-  
-       </tr>
-            )
-        })
-    }
+    // delete books by id
+    const deleteBooks = (id) => {
+        // console.log(books);
+        // console.log("working");
+        // console.log(id);
+        API.deleteBook(id)
+            .then((res) => {
+                // console.log(res);
+                // then update books
+                API.getApiBooks()
+                    .then(response => {
+                        // console.log("delete grab response: ", response);
+                        setBooks(response.data)
+                    })
+            })
 
+    };
 
+    // grabbing the books from the database on initial render
+    useEffect(() => {
+        API.getApiBooks()
+            .then(res => setBooks(res.data))
+        // console.log(books)
+    }, []);
 
-render() {
-    return(
-    
+    // re-render page when books is updated
+    useEffect(() => {
+    }, [books]);
 
-<div>
-    <div id="Saved" style={{ height: 650, clear: "both", paddingTop: 120, textAlign: "center", marginTop: 108 }}>
-        <div className="card">
-            <h3>Your Saved Results</h3>
-            <table id='books' className="table">
-            <thead>
-                <tr>
-                    <th scope="col">image</th>
-                    <th scope="col">Title</th>
-                    <th scope="col">Author(s)</th>
-                    <th scope="col">Description</th>
-                    <th scope="col">Link</th>
-                </tr>
-            </thead>
-            <tbody>
-                 {this.renderSavedTable()}
-           </tbody>
-           </table>
+ 
+
+    return (
+        <div className="mb-5">
+            <React.Fragment>
+                <Navbar />
+                <Jumbotron />
+     
+                <SavedBooks
+                    books={books}
+                    deleteBooks={deleteBooks} style={{ height: 650, clear: "both", paddingTop: 120, textAlign: "center", marginTop: 108 }}/>
+               
+            </React.Fragment>
         </div>
-    </div>    
-</div>
-    
- )}        
-}
-  
+    );
+};
+
 export default Saved;

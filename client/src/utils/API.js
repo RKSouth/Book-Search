@@ -34,7 +34,7 @@ export default {
         return axios.get("/api/books/" )
         .then(response => {
             return response.data;
-            console.log(response.data)
+       
         } )
     }
 

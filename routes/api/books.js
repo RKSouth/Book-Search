@@ -1,18 +1,22 @@
+/*requiring router and our controllers to connect the two and call on
+The functions made by the controller. */
 const router = require("express").Router();
-const booksController = require("../../controllers/booksController");
+const bookController = require("../../controllers/controller");
 
-// Matches with "/api/books"
+// setting routes for the get and post functions
+//  using the functions "findAll" and "create" from the controller.
 router
   .route("/")
-  .get(booksController.findAll)
-  .post(booksController.create)
-  .post(booksController.update);
+  .get(bookController.findAll)
+  .post(bookController.create)
 
-// Matches with "/api/books/:id"
-router
-  .route("/:id")
-  .get(booksController.findById)
-  .put(booksController.update)
-  .delete(booksController.remove);
+  // setting the route "/:id" for the remove function in our controller
+router.route("/:id").delete(bookController.remove);
 
+// Setting the route "/search" for the "findById" function in the controller. 
+router 
+    .route("/search")
+    .get(bookController.findById)
+
+// exporting our routes. 
 module.exports = router;
