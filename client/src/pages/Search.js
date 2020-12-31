@@ -104,16 +104,9 @@ function Search() {
         <div>
         <Navbar />
         <Jumbotron />
- 
-          
              <SearchBar
                 handleSearchChange={handleSearchChange}
                 searchBooks={searchBooks} />
-               
-
-        
-        
-     
         
             <Results
                 data={books}
@@ -123,7 +116,6 @@ function Search() {
                 modalClass={modalClass}
             />
           
-           
         </div>
     );
 };
