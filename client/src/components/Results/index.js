@@ -14,11 +14,9 @@ function Results(props) {
           // console.log(book.volumeInfo.authors.length)
 
           return (
-            <div key={book.id + i} className="container" id="Results">
+            <div key={book.id + i}>
               <div className="card-results">
               <h3>Your Search Results</h3>
-                
-
                 <div className="row mb-4 mt-3">
                   <div className="col-lg-4 bookImg">
                     {/* if there are no images of the books, set a defauly logo */}

@@ -101,21 +101,20 @@ function Search() {
 
 
     return (
-      <div>
-      <div
-      style={{ height: 650, clear: "both", paddingTop: 120, textAlign: "center", marginTop: 138 }}
-      className="jumbotron" id ="Search"
-   >
-          <div>
+        <div>
+        <Navbar />
+        <Jumbotron />
+ 
+          
              <SearchBar
                 handleSearchChange={handleSearchChange}
                 searchBooks={searchBooks} />
                
 
-               </div>
+        
         
      
-        </div>
+        
             <Results
                 data={books}
                 saveBook={saveBook}
@@ -123,7 +122,8 @@ function Search() {
                 text={text}
                 modalClass={modalClass}
             />
-     
+          
+           
         </div>
     );
 };
