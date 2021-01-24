@@ -15,6 +15,7 @@ function Results(props) {
           return (
             <div key={book.id + i}>
               <div className="card-results">
+              <h2>{book.volumeInfo.title}</h2>
                 <div className="row mb-4 mt-3">
                   <div className="col-lg-4 bookImg">
                     {/* if there are no images of the books, set a default logo */}
@@ -33,7 +34,6 @@ function Results(props) {
                     )}
                   </div>
                   <div className="col-lg-8 mainContent">
-                    <h2>{book.volumeInfo.title}</h2>
                     {/* if there are more than x number of authors, join with an "&" */}
                     <p>
                       {book.volumeInfo.authors !== undefined

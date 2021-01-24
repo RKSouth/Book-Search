@@ -28,6 +28,9 @@ nav {
 h1 {
   color: rgb(66,54,45);
 }
+h2 {
+  margin: 2%;;
+}
 #searchBtn {
   margin-left: 1%;
   color: rgb(66,54,45);

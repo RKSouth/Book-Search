@@ -9,13 +9,15 @@ function SavedBooks({ books, deleteBooks }) {
       return (
         <div key={book.id} className="container">
           <div className="card">
+          <h2>{book.title}</h2>
             <div className="row mb-4 mt-3">
               <div className="col-lg-4 bookImg">
+              
                 {book.image ? <img src={book.image} alt="title" className="img-fluid" />
                   : <img src="https://via.placeholder.com/140x100" alt="title" className="img-fluid" />}
               </div>
               <div className="col-lg-8 savedContent">
-                <h2>{book.title}</h2>
+              
                 <p>{book.author.join(' & ')}</p>
                 <p className="mr-4">{book.description}</p>
                 <a className="btn btn-outline-light my-2 my-sm-0" target="_blank" rel="noreferrer" href={book.link}>View</a>
