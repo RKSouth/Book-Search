@@ -21,7 +21,13 @@
 h1 {
   color: rgb(66,54,45);
 }
+.btn {
+  margin: 1%;
+}
 
+.row {
+margin: 3%;
+}
 .card {
   background-color: rgb(66, 54, 45);
   opacity: 0.89;
@@ -32,12 +38,8 @@ h1 {
   background-color: rgb(66, 54, 45);
   opacity: 0.92;
   color: whitesmoke;
-  height: 360; 
-  clear: "both"; 
-  padding-top: 120; 
-  text-align: "center"; 
-  margin-top: 600;
   margin: 3%;
+  padding: 1%;
 }
 
 

@@ -76,7 +76,6 @@ function Search() {
             setModalClass("modal showModal");
             setText(book.volumeInfo.title + " is already saved!");
         };
-
         // setting an object with the data we grabbed from the axios call and passing in the data to be saved into the database
         const data = {
             title: book.volumeInfo.title,
@@ -86,7 +85,6 @@ function Search() {
             link: book.volumeInfo.infoLink,
             id: book.id
         };
-
         API.addBook(data).then(res => {
             console.log("saved", res)
 
