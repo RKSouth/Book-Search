@@ -28,6 +28,14 @@ h1 {
 .row {
 margin: 3%;
 }
+
+.searchBtn {
+  background-color:whitesmoke;
+  opacity: 0.89;
+  color: rgb(66, 54, 45);
+  margin-top: 3%;
+}
+
 .card {
   background-color: rgb(66, 54, 45);
   opacity: 0.89;

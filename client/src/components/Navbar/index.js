@@ -27,7 +27,7 @@ function Navbar() {
                         <li className="nav-item">
                             <NavLink to="/saved" className="nav-link">Saved</NavLink>
                         </li>
-            >
+            
                     </ul>
                     <div className="px-3"></div>
                     </div>
