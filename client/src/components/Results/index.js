@@ -12,14 +12,12 @@ function Results(props) {
       {books !== undefined ? (
         books.map((book, i) => {
           // console.log(book.volumeInfo.authors.length)
-
           return (
             <div key={book.id + i}>
               <div className="card-results">
-              <h3>Your Search Results</h3>
                 <div className="row mb-4 mt-3">
                   <div className="col-lg-4 bookImg">
-                    {/* if there are no images of the books, set a defauly logo */}
+                    {/* if there are no images of the books, set a default logo */}
                     {book.volumeInfo.imageLinks ? (
                       <img
                         className="img-fluid"
