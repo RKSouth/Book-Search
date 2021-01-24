@@ -100,7 +100,6 @@ function Search() {
 
     return (
         <div>
-        <Navbar />
         <Jumbotron />
              <SearchBar
                 handleSearchChange={handleSearchChange}

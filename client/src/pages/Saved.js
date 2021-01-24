@@ -43,9 +43,7 @@ function Saved() {
     return (
         <div className="mb-5">
             <React.Fragment>
-                <Navbar />
                 <Jumbotron />
-     
                 <SavedBooks
                     books={books}
                     deleteBooks={deleteBooks} style={{ height: 650, clear: "both", paddingTop: 120, textAlign: "center", marginTop: 108 }}/>

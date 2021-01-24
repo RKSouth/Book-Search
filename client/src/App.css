@@ -13,6 +13,13 @@
     animation: App-logo-spin infinite 20s linear;
   }
 }
+
+nav {
+ 
+  color: rgb(66,54,45);
+  background-color: whitesmoke;
+  opacity: 0.89;
+}
 .jumbotron {
   /* margin-top: 20; */
   opacity: 0.8;
