@@ -24,7 +24,7 @@
 
 
 ## Deployed Site
-[ClickClick!](https://pure-dawn-66807.herokuapp.com/)
+[The Book Nook](https://pure-dawn-66807.herokuapp.com/)
 
 ## Features 
  
@@ -74,7 +74,7 @@ Rachael Kelm-Southworth
 
 * [linkedin](https://www.linkedin.com/in/rachael-kelm-southworth-87a3831b3) 
 
-* [Portfolio](https://rksouth.github.io/Portfolio/ )
+* [Portfolio](https://rksouth.github.io/React-Portfolio/ )
 
 * [github](https://github.com/RKSouth/)
 

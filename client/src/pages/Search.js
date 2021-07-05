@@ -6,17 +6,11 @@ import Jumbotron from "../components/Jumbotron";
 
 // Search page that allows the user to search for books
 function Search() {
-    // variables for the book the user is searching for
     const [searchState, setSearchState] = useState("");
     const [books, setBooks] = useState([]);
- 
-
-    // variables for the modal that will pop up when the user clicks on the save book button
     const [modalClass, setModalClass] = useState("modal hideModal");
     const [text, setText] = useState("Saved!");
-    // saved book ids
     const [ids, setIds] = useState([]);
-
     // for the modal display to hide or show
     useEffect(() => {
     }, [modalClass]);
@@ -24,14 +18,11 @@ function Search() {
     function modalClose() {
         setModalClass("modal hideModal");
     };
-
     // function for the user's input that tracks every letter typed in by the user
     const handleSearchChange = (e) => {
         const { value } = e.target
         setSearchState(value)
-        // console.log(searchState)
     };
-
     // function that is grabbing the information from the google books API
     const searchBooks = async () => {
         let temp = [];
@@ -53,7 +44,6 @@ function Search() {
 
     // function that allows books to be saved qne displaying the modal
     const saveBook = (book) => {
-        // console.log("savebook: ", book);
         var image;
         if (book.volumeInfo.imageLinks === undefined) {
             image = "./googlebookslogo.png"
