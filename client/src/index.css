@@ -6,6 +6,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-image: url("./pexels-pixabay-159711.jpg");
+  color:  rgb(51, 43, 38);
 }
 
 code {

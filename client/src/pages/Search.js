@@ -1,12 +1,8 @@
 import React, { useState, useEffect } from "react";
-import Navbar from "../components/Navbar"
 import SearchBar from "../components/SearchBar"
 import Results from "../components/Results"
 import API from '../utils/booksAPI'
 import Jumbotron from "../components/Jumbotron";
-
-
-
 
 // Search page that allows the user to search for books
 function Search() {
@@ -51,9 +47,7 @@ function Search() {
                 for (let i = 0; i < res.data.length; i++) {
                     temp.push(res.data[i].id);
                 }
-                console.log("savebook response: ", res)
             })
-        console.log("temp: ", temp);
         setIds(temp);
     };
 
@@ -66,8 +60,6 @@ function Search() {
         } else {
             image = book.volumeInfo.imageLinks.thumbnail
         };
-
-        // console.log("book id: ", book.id);
         if (!ids.includes(book.id)) {
             setIds([...ids, book.id]);
             setModalClass("modal showModal");
